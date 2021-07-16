@@ -70,8 +70,7 @@ object Main {
 
     println("Merchants with top guests count by quarters:")
     reservationsByQuartersDf.as("a").join(reservationsByQuartersDf.as("b"),
-      when(expr("a.quarter = b.quarter AND a.reservations < b.reservations"), true)
-        .otherwise(false)
+      expr("a.quarter = b.quarter AND a.reservations < b.reservations")
       , "left")
       .where("b.reservations is NULL")
       .select("a.*")
